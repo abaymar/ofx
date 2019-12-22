@@ -45,7 +45,7 @@ namespace Mocoding.Ofx.Client
         /// <returns>Raw OFX Payload</returns>
         public async Task<string> ProcessOfxMessage(AbstractTopLevelMessageSet message)
         {
-	        var request = PrepareOfxRequest(AuthRequest(), message);
+	        var request = PrepareOfxRequest(AuthRequest(), message); 
 	        var response = await _utils.PostRequest(_opts.ApiUrl, request);
 
 	        return response;
@@ -159,7 +159,7 @@ namespace Mocoding.Ofx.Client
         internal string PrepareOfxRequest(IRequestBuilder authBuilder, AbstractTopLevelMessageSet messageSet)
         {
 	        var authMessage = authBuilder.Build();
-            var ofxRequest = new OFX() { Items =  new[]{authMessage, messageSet} };
+	        var ofxRequest = new OFX { Items = new[]{authMessage, messageSet} };
 	        var content = _serializer.Serialize(ofxRequest);
 
 	        return content;
